@@ -1,7 +1,6 @@
 services:
-  - type: web
-    name: hwa-bot
+  - name: hwa-bot
     env: python
     plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: python bottt.py
+    startCommand: python bott.py
