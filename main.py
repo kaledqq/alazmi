@@ -1,11 +1,8 @@
-import os
 import telebot
 import requests
-from dotenv import load_dotenv
 
-load_dotenv()
-
-TOKEN = os.getenv("BOT_TOKEN")
+# التوكن مباشر
+TOKEN = "7670193260:AAETwqRN6dWiWfT3wdA7Ht1Z4m9pDbGtUYQ"
 CHANNEL_USERNAME = "@hwa171"
 
 bot = telebot.TeleBot(TOKEN)
@@ -21,6 +18,7 @@ def is_user_subscribed(user_id):
         print(f"Error checking subscription: {e}")
         return False
 
+# أمر /start
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
     user_id = message.from_user.id
@@ -30,16 +28,15 @@ def send_welcome(message):
     else:
         bot.send_message(message.chat.id, f"يرجى الاشتراك في القناة أولاً: {CHANNEL_USERNAME}")
 
+# استقبال الروابط
 @bot.message_handler(func=lambda message: True)
 def handle_message(message):
     user_id = message.from_user.id
     if user_states.get(user_id) == "awaiting_link":
         url = message.text.strip()
         bot.send_message(message.chat.id, f"جاري التحميل من الرابط: {url}")
-        # هنا مكان تحميل الفيديو وإرساله
-        # تقدر تضيف yt_dlp وتحط الكود
-        # الآن مجرد رد وهمي
-        bot.send_message(message.chat.id, "تم التحميل (وهمياً).")
+        # رد وهمي
+        bot.send_message(message.chat.id, "✅ تم التحميل (وهمياً).")
         user_states[user_id] = None
     else:
         bot.send_message(message.chat.id, "اكتب /start للبدء.")
