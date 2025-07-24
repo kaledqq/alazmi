@@ -1,8 +1,11 @@
 services:
   - type: web
-    name: telegram-bot
+    name: alazmi
     env: python
-    buildCommand: pip install -r requirements.txt
+    build:
+      environment:
+        pythonVersion: 3.10.13
     startCommand: python main.py
     plan: free
-    pythonVersion: 3.10
+    branch: main
+    autoDeploy: true
